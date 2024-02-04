@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         float lookY = looking.y * lookSensitivity * Time.deltaTime;
 
         xRotation -= lookY;
-        //xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Clamp to prevent over-rotation
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Clamp to prevent over-rotation
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
