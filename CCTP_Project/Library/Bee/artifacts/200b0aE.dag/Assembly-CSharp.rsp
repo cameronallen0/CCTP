@@ -356,6 +356,7 @@
 "Assets/Input/PlayerControls.cs"
 "Assets/Scripts/FreeCamPlayer.cs"
 "Assets/Scripts/GravityChanger.cs"
+"Assets/Scripts/PlayerRiftMovement1.cs"
 -langversion:9.0
 
 /deterministic
