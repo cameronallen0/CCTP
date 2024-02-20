@@ -14,7 +14,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
     //Rift
     public GameObject riftObject;
     private List<GameObject> riftObjects = new List<GameObject>();
-    private int nextIndex = 0;
+    private int nextIndex;
     private bool  isInsideRift = false;
 
     [SerializeField] private Camera cam;
@@ -190,10 +190,9 @@ public class PlayerRiftMovement1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Rift") && !isInsideRift)
         {
+            GameObject collidedObject = other.gameObject;
             isInsideRift = true;
-
-            string riftIdentifier = other.gameObject.name;
-            int riftIndex = GetRiftIndex(riftIdentifier);
+            int riftIndex = riftObjects.IndexOf(collidedObject);
 
             if (riftIndex != -1)
             {
@@ -210,30 +209,30 @@ public class PlayerRiftMovement1 : MonoBehaviour
         }
     }
 
-
-    int GetRiftIndex(string riftIdentifier)
-    {
-        for(int i = 0; i < riftObjects.Count; i++)
-        {
-            if(riftObjects[i].name == riftIdentifier)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     private void TeleportPlayer(int riftIndex)
     {
         if (riftObjects.Count >= 2)
         {
-            nextIndex = (riftIndex + 1);
-            GameObject destination = riftObjects[nextIndex];
-            Transform destinationTransform = destination.transform;
+            if(riftIndex == 0)
+            {
+                nextIndex = riftIndex + 1;
+                GameObject destination = riftObjects[nextIndex];
+                Transform destinationTransform = destination.transform;
 
-            controller.enabled = false;
-            transform.position = destinationTransform.position;
-            controller.enabled = true;
+                controller.enabled = false;
+                transform.position = destinationTransform.position;
+                controller.enabled = true;
+            }
+            if(riftIndex == 1)
+            {
+                nextIndex = riftIndex - 1;
+                GameObject destination = riftObjects[nextIndex];
+                Transform destinationTransform = destination.transform;
+
+                controller.enabled = false;
+                transform.position = destinationTransform.position;
+                controller.enabled = true;
+            }
 
         }
     }
