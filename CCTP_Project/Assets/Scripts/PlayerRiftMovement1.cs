@@ -11,17 +11,14 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     private CharacterController controller;
 
-    //Rift
-    public GameObject riftObject;
+    //Rift Variables
+    [SerializeField] private GameObject riftObject;
     private List<GameObject> riftObjects = new List<GameObject>();
     private int nextIndex;
     private bool  isInsideRift = false;
 
+    //Camera Variables
     [SerializeField] private Camera cam;
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float crouchSpeed = 5f;
-    [SerializeField] private float walkSpeed = 10f;
-    [SerializeField] private float runSpeed = 15f;
     [SerializeField] public float lookSensitivity = 30f;
 
     public LayerMask groundLayer;
@@ -30,17 +27,21 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     // Movement Variables
     private Vector3 velocity;
-    public float gravity = -19.62f;
+    private float gravity = -20f;
     private bool grounded;
     private bool isRunning;
+    [SerializeField] private float movementSpeed;
+    private float crouchSpeed = 5f;
+    private float walkSpeed = 10f;
+    private float runSpeed = 15f;
 
     //Jump Variables
-    [SerializeField] private float jumpHeight = 3.0f;
+    private float jumpHeight = 3.0f;
     private bool isJumping;
 
     // Crouch Variables
     private float initHeight;
-    [SerializeField] private float crouchHeight;
+    private float crouchHeight;
     private bool isCrouching;
 
     private void Awake()
