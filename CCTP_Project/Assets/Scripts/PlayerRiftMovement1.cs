@@ -67,6 +67,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
         DoJump();
         DoRun();
         DoFire();
+        DoRemove();
     }
 
     private void DoLooking()
@@ -183,6 +184,18 @@ public class PlayerRiftMovement1 : MonoBehaviour
         {
             Destroy(riftObjects[0]);
             riftObjects.RemoveAt(0);
+        }
+    }
+
+    public void DoRemove()
+    {
+        if(inputActions.PlayerController.Remove.triggered)
+        {
+            foreach (GameObject rift in riftObjects)
+            {
+                Destroy(rift);
+            }
+            riftObjects.Clear();
         }
     }
 
