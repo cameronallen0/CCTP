@@ -11,19 +11,23 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     private CharacterController controller;
 
+    //Movemnt Type Variables
+    public int movemmentType = 0;
+
     //Rift Variables
     [SerializeField] private GameObject riftObject;
     private List<GameObject> riftObjects = new List<GameObject>();
     private int nextIndex;
-    private bool  isInsideRift = false;
+    private bool isInsideRift = false;
 
     //Camera Variables
     [SerializeField] private Camera cam;
     [SerializeField] public float lookSensitivity = 30f;
-
-    public LayerMask groundLayer;
-
     private float xRotation = 0f;
+
+    //Layer Variables
+    public LayerMask groundLayer;
+    public LayerMask riftLayers;
 
     // Movement Variables
     private Vector3 velocity;
@@ -62,6 +66,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     private void Update()
     {
+        DoChangeMovement();
         DoMovement();
         DoLooking();
         DoCrouch();
@@ -70,6 +75,26 @@ public class PlayerRiftMovement1 : MonoBehaviour
         DoFire();
         DoRemove();
     }
+
+    private void DoChangeMovement()
+    {
+        if(inputActions.PlayerController.Movement0.triggered)
+        {
+            movemmentType = 0;
+        }
+        if (inputActions.PlayerController.Movement1.triggered)
+        {
+            movemmentType = 1;
+        }
+        if (inputActions.PlayerController.Movement2.triggered)
+        {
+            movemmentType = 2;
+        }
+        if (inputActions.PlayerController.Movement3.triggered)
+        {
+            movemmentType = 3;
+        }
+    }    
 
     private void DoLooking()
     {
@@ -158,16 +183,19 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public void DoFire()
     {
-        if(inputActions.PlayerController.Fire.triggered)
+        if(movemmentType == 1)
         {
-            Ray riftRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit riftHit;
-
-            if(Physics.Raycast(riftRay, out riftHit))
+            if (inputActions.PlayerController.Fire.triggered)
             {
-                SpawnObject(riftHit.point, riftHit.normal);
-                Debug.Log("Click");
-                RemoveRift();
+                Ray riftRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit riftHit;
+
+                if (Physics.Raycast(riftRay, out riftHit, Mathf.Infinity, riftLayers))
+                {
+                    SpawnObject(riftHit.point, riftHit.normal);
+                    Debug.Log("Click");
+                    RemoveRift();
+                }
             }
         }
     }
@@ -181,7 +209,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public void RemoveRift()
     {
-        if(riftObjects.Count > 2)
+        if (riftObjects.Count > 2)
         {
             Destroy(riftObjects[0]);
             riftObjects.RemoveAt(0);
@@ -190,13 +218,16 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public void DoRemove()
     {
-        if(inputActions.PlayerController.Remove.triggered)
+        if(movemmentType == 1)
         {
-            foreach (GameObject rift in riftObjects)
+            if (inputActions.PlayerController.Remove.triggered)
             {
-                Destroy(rift);
+                foreach (GameObject rift in riftObjects)
+                {
+                    Destroy(rift);
+                }
+                riftObjects.Clear();
             }
-            riftObjects.Clear();
         }
     }
 
@@ -227,30 +258,18 @@ public class PlayerRiftMovement1 : MonoBehaviour
     {
         if (riftObjects.Count >= 2)
         {
-            if(riftIndex == 0)
+            if (riftIndex == 0 || riftIndex == 1)
             {
-                nextIndex = riftIndex + 1;
-                GameObject destination = riftObjects[nextIndex];
-                Transform destinationTransform = destination.transform;
+                nextIndex = (riftIndex + 1) % 2;
+                GameObject originRift = riftObjects[riftIndex];
+                GameObject destinationRift = riftObjects[nextIndex];
 
                 controller.enabled = false;
-                transform.position = destinationTransform.position;
+                transform.position = destinationRift.transform.position;
                 controller.enabled = true;
             }
-            if(riftIndex == 1)
-            {
-                nextIndex = riftIndex - 1;
-                GameObject destination = riftObjects[nextIndex];
-                Transform destinationTransform = destination.transform;
-
-                controller.enabled = false;
-                transform.position = destinationTransform.position;
-                controller.enabled = true;
-            }
-
         }
     }
-
 
     private Vector2 GetMousePositionInWorld()
     {

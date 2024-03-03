@@ -89,6 +89,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement0"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2630ae5-0d64-48ab-874b-2ac230bd3fc8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement1"",
+                    ""type"": ""Button"",
+                    ""id"": ""35982d60-4a37-4ad5-96de-bf6028f4125c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8699fed0-b249-4fd9-b037-8308f30b4fd8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0e5c3b9-aec9-4a93-9d1c-b23154826263"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +325,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Remove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""372998ac-884d-4040-9e9d-e36e7fdcda77"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02dfccb0-5a2b-4515-9efa-bbe1541e1390"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c77cc88-6637-4f2b-9d43-2456df649a10"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cec03d69-cd7a-42a7-bb58-973a12cd0533"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -304,6 +384,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerController_Crouch = m_PlayerController.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerController_Fire = m_PlayerController.FindAction("Fire", throwIfNotFound: true);
         m_PlayerController_Remove = m_PlayerController.FindAction("Remove", throwIfNotFound: true);
+        m_PlayerController_Movement0 = m_PlayerController.FindAction("Movement0", throwIfNotFound: true);
+        m_PlayerController_Movement1 = m_PlayerController.FindAction("Movement1", throwIfNotFound: true);
+        m_PlayerController_Movement2 = m_PlayerController.FindAction("Movement2", throwIfNotFound: true);
+        m_PlayerController_Movement3 = m_PlayerController.FindAction("Movement3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +456,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerController_Crouch;
     private readonly InputAction m_PlayerController_Fire;
     private readonly InputAction m_PlayerController_Remove;
+    private readonly InputAction m_PlayerController_Movement0;
+    private readonly InputAction m_PlayerController_Movement1;
+    private readonly InputAction m_PlayerController_Movement2;
+    private readonly InputAction m_PlayerController_Movement3;
     public struct PlayerControllerActions
     {
         private @PlayerControls m_Wrapper;
@@ -383,6 +471,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_PlayerController_Crouch;
         public InputAction @Fire => m_Wrapper.m_PlayerController_Fire;
         public InputAction @Remove => m_Wrapper.m_PlayerController_Remove;
+        public InputAction @Movement0 => m_Wrapper.m_PlayerController_Movement0;
+        public InputAction @Movement1 => m_Wrapper.m_PlayerController_Movement1;
+        public InputAction @Movement2 => m_Wrapper.m_PlayerController_Movement2;
+        public InputAction @Movement3 => m_Wrapper.m_PlayerController_Movement3;
         public InputActionMap Get() { return m_Wrapper.m_PlayerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +505,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Remove.started += instance.OnRemove;
             @Remove.performed += instance.OnRemove;
             @Remove.canceled += instance.OnRemove;
+            @Movement0.started += instance.OnMovement0;
+            @Movement0.performed += instance.OnMovement0;
+            @Movement0.canceled += instance.OnMovement0;
+            @Movement1.started += instance.OnMovement1;
+            @Movement1.performed += instance.OnMovement1;
+            @Movement1.canceled += instance.OnMovement1;
+            @Movement2.started += instance.OnMovement2;
+            @Movement2.performed += instance.OnMovement2;
+            @Movement2.canceled += instance.OnMovement2;
+            @Movement3.started += instance.OnMovement3;
+            @Movement3.performed += instance.OnMovement3;
+            @Movement3.canceled += instance.OnMovement3;
         }
 
         private void UnregisterCallbacks(IPlayerControllerActions instance)
@@ -438,6 +542,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Remove.started -= instance.OnRemove;
             @Remove.performed -= instance.OnRemove;
             @Remove.canceled -= instance.OnRemove;
+            @Movement0.started -= instance.OnMovement0;
+            @Movement0.performed -= instance.OnMovement0;
+            @Movement0.canceled -= instance.OnMovement0;
+            @Movement1.started -= instance.OnMovement1;
+            @Movement1.performed -= instance.OnMovement1;
+            @Movement1.canceled -= instance.OnMovement1;
+            @Movement2.started -= instance.OnMovement2;
+            @Movement2.performed -= instance.OnMovement2;
+            @Movement2.canceled -= instance.OnMovement2;
+            @Movement3.started -= instance.OnMovement3;
+            @Movement3.performed -= instance.OnMovement3;
+            @Movement3.canceled -= instance.OnMovement3;
         }
 
         public void RemoveCallbacks(IPlayerControllerActions instance)
@@ -464,5 +580,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnRemove(InputAction.CallbackContext context);
+        void OnMovement0(InputAction.CallbackContext context);
+        void OnMovement1(InputAction.CallbackContext context);
+        void OnMovement2(InputAction.CallbackContext context);
+        void OnMovement3(InputAction.CallbackContext context);
     }
 }

@@ -2,17 +2,17 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
+DeleteMeDemo/[Ll]ibrary/
+DeleteMeDemo/[Tt]emp/
+DeleteMeDemo/[Oo]bj/
+DeleteMeDemo/[Bb]uild/
+DeleteMeDemo/[Bb]uilds/
+DeleteMeDemo/[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-/[Mm]emoryCaptures/
+DeleteMeDemo/[Mm]emoryCaptures/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
