@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class PlayerRiftMovement1 : MonoBehaviour
     private PlayerControls inputActions;
 
     private CharacterController controller;
+
+    public TextMeshProUGUI uiText;
 
     //Movemnt Type Variables
     public int movemmentType = 0;
@@ -57,6 +60,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
         controller = GetComponent<CharacterController>();
         initHeight = controller.height;
         Cursor.lockState = CursorLockMode.Locked;
+        uiText.text = "Standard Movement";
     }
 
     private void OnEnable()
@@ -81,10 +85,12 @@ public class PlayerRiftMovement1 : MonoBehaviour
         if(inputActions.PlayerController.Movement0.triggered)
         {
             movemmentType = 0;
+            uiText.text = "Standard Movement";
         }
         if (inputActions.PlayerController.Movement1.triggered)
         {
             movemmentType = 1;
+            uiText.text = "Rift Movement";
         }
         if (inputActions.PlayerController.Movement2.triggered)
         {
@@ -195,6 +201,10 @@ public class PlayerRiftMovement1 : MonoBehaviour
                     SpawnObject(riftHit.point, riftHit.normal);
                     Debug.Log("Click");
                     RemoveRift();
+                }
+                if(riftHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    Debug.Log("No Rift");
                 }
             }
         }
