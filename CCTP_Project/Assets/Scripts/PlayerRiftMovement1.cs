@@ -14,8 +14,10 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public TextMeshProUGUI uiText;
 
+    public Swapper swap;
+
     //Movemnt Type Variables
-    public int movemmentType = 0;
+    public int movementType = 0;
 
     //Rift Variables
     [SerializeField] private GameObject riftObject;
@@ -24,7 +26,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
     private bool isInsideRift = false;
 
     //Camera Variables
-    [SerializeField] private Camera cam;
+    [SerializeField] public Camera cam;
     [SerializeField] public float lookSensitivity = 30f;
     private float xRotation = 0f;
 
@@ -84,21 +86,22 @@ public class PlayerRiftMovement1 : MonoBehaviour
     {
         if(inputActions.PlayerController.Movement0.triggered)
         {
-            movemmentType = 0;
+            movementType = 0;
             uiText.text = "Standard Movement";
         }
         if (inputActions.PlayerController.Movement1.triggered)
         {
-            movemmentType = 1;
+            movementType = 1;
             uiText.text = "Rift Movement";
         }
         if (inputActions.PlayerController.Movement2.triggered)
         {
-            movemmentType = 2;
+            movementType = 2;
+            uiText.text = "Swapper Movement";
         }
         if (inputActions.PlayerController.Movement3.triggered)
         {
-            movemmentType = 3;
+            movementType = 3;
         }
     }    
 
@@ -189,7 +192,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public void DoFire()
     {
-        if(movemmentType == 1)
+        if(movementType == 1)
         {
             if (inputActions.PlayerController.Fire.triggered)
             {
@@ -198,14 +201,25 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
                 if (Physics.Raycast(riftRay, out riftHit, Mathf.Infinity, riftLayers))
                 {
-                    SpawnObject(riftHit.point, riftHit.normal);
-                    Debug.Log("Click");
-                    RemoveRift();
-                }
-                if(riftHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                {
-                    Debug.Log("No Rift");
-                }
+                    if (riftHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    {
+                        Debug.Log("No Rift");
+                    }
+                    else
+                    {
+                        SpawnObject(riftHit.point, riftHit.normal);
+                        Debug.Log("Click");
+                        RemoveRift();
+                    }
+
+                }            
+            }
+        }
+        if(movementType == 2)
+        {
+            if(inputActions.PlayerController.Fire.triggered)
+            {
+                swap.GetObjectPosition();
             }
         }
     }
@@ -228,7 +242,7 @@ public class PlayerRiftMovement1 : MonoBehaviour
 
     public void DoRemove()
     {
-        if(movemmentType == 1)
+        if(movementType == 1)
         {
             if (inputActions.PlayerController.Remove.triggered)
             {
