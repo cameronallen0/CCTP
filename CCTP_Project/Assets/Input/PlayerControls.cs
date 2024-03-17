@@ -73,7 +73,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""b0e27556-a54d-41a0-bbf5-4613689f7586"",
                     ""expectedControlType"": ""Button"",
@@ -82,46 +82,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Remove"",
-                    ""type"": ""Button"",
-                    ""id"": ""fd45348f-81a5-4f06-858b-104be3633a1a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Movement0"",
-                    ""type"": ""Button"",
-                    ""id"": ""b2630ae5-0d64-48ab-874b-2ac230bd3fc8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Movement1"",
-                    ""type"": ""Button"",
-                    ""id"": ""35982d60-4a37-4ad5-96de-bf6028f4125c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Movement2"",
-                    ""type"": ""Button"",
-                    ""id"": ""8699fed0-b249-4fd9-b037-8308f30b4fd8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Movement3"",
-                    ""type"": ""Button"",
-                    ""id"": ""c0e5c3b9-aec9-4a93-9d1c-b23154826263"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""249d8a19-95b6-4157-88d6-9810c9e4d8e2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -289,7 +253,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,73 +264,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""152ada62-8ecc-4024-9c63-13c3b1fee3b5"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""f50db41e-929a-4954-a57b-1d9242e77fe3"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Remove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""76456880-89a5-49b5-9bf8-3d20e1352c4a"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Remove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""372998ac-884d-4040-9e9d-e36e7fdcda77"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02dfccb0-5a2b-4515-9efa-bbe1541e1390"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c77cc88-6637-4f2b-9d43-2456df649a10"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cec03d69-cd7a-42a7-bb58-973a12cd0533"",
-                    ""path"": ""<Keyboard>/0"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement0"",
+                    ""action"": ""SwitchWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -382,12 +291,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerController_Run = m_PlayerController.FindAction("Run", throwIfNotFound: true);
         m_PlayerController_Jump = m_PlayerController.FindAction("Jump", throwIfNotFound: true);
         m_PlayerController_Crouch = m_PlayerController.FindAction("Crouch", throwIfNotFound: true);
-        m_PlayerController_Fire = m_PlayerController.FindAction("Fire", throwIfNotFound: true);
-        m_PlayerController_Remove = m_PlayerController.FindAction("Remove", throwIfNotFound: true);
-        m_PlayerController_Movement0 = m_PlayerController.FindAction("Movement0", throwIfNotFound: true);
-        m_PlayerController_Movement1 = m_PlayerController.FindAction("Movement1", throwIfNotFound: true);
-        m_PlayerController_Movement2 = m_PlayerController.FindAction("Movement2", throwIfNotFound: true);
-        m_PlayerController_Movement3 = m_PlayerController.FindAction("Movement3", throwIfNotFound: true);
+        m_PlayerController_Shoot = m_PlayerController.FindAction("Shoot", throwIfNotFound: true);
+        m_PlayerController_SwitchWeapon = m_PlayerController.FindAction("SwitchWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -454,12 +359,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerController_Run;
     private readonly InputAction m_PlayerController_Jump;
     private readonly InputAction m_PlayerController_Crouch;
-    private readonly InputAction m_PlayerController_Fire;
-    private readonly InputAction m_PlayerController_Remove;
-    private readonly InputAction m_PlayerController_Movement0;
-    private readonly InputAction m_PlayerController_Movement1;
-    private readonly InputAction m_PlayerController_Movement2;
-    private readonly InputAction m_PlayerController_Movement3;
+    private readonly InputAction m_PlayerController_Shoot;
+    private readonly InputAction m_PlayerController_SwitchWeapon;
     public struct PlayerControllerActions
     {
         private @PlayerControls m_Wrapper;
@@ -469,12 +370,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_PlayerController_Run;
         public InputAction @Jump => m_Wrapper.m_PlayerController_Jump;
         public InputAction @Crouch => m_Wrapper.m_PlayerController_Crouch;
-        public InputAction @Fire => m_Wrapper.m_PlayerController_Fire;
-        public InputAction @Remove => m_Wrapper.m_PlayerController_Remove;
-        public InputAction @Movement0 => m_Wrapper.m_PlayerController_Movement0;
-        public InputAction @Movement1 => m_Wrapper.m_PlayerController_Movement1;
-        public InputAction @Movement2 => m_Wrapper.m_PlayerController_Movement2;
-        public InputAction @Movement3 => m_Wrapper.m_PlayerController_Movement3;
+        public InputAction @Shoot => m_Wrapper.m_PlayerController_Shoot;
+        public InputAction @SwitchWeapon => m_Wrapper.m_PlayerController_SwitchWeapon;
         public InputActionMap Get() { return m_Wrapper.m_PlayerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -499,24 +396,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
-            @Remove.started += instance.OnRemove;
-            @Remove.performed += instance.OnRemove;
-            @Remove.canceled += instance.OnRemove;
-            @Movement0.started += instance.OnMovement0;
-            @Movement0.performed += instance.OnMovement0;
-            @Movement0.canceled += instance.OnMovement0;
-            @Movement1.started += instance.OnMovement1;
-            @Movement1.performed += instance.OnMovement1;
-            @Movement1.canceled += instance.OnMovement1;
-            @Movement2.started += instance.OnMovement2;
-            @Movement2.performed += instance.OnMovement2;
-            @Movement2.canceled += instance.OnMovement2;
-            @Movement3.started += instance.OnMovement3;
-            @Movement3.performed += instance.OnMovement3;
-            @Movement3.canceled += instance.OnMovement3;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerControllerActions instance)
@@ -536,24 +421,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
-            @Remove.started -= instance.OnRemove;
-            @Remove.performed -= instance.OnRemove;
-            @Remove.canceled -= instance.OnRemove;
-            @Movement0.started -= instance.OnMovement0;
-            @Movement0.performed -= instance.OnMovement0;
-            @Movement0.canceled -= instance.OnMovement0;
-            @Movement1.started -= instance.OnMovement1;
-            @Movement1.performed -= instance.OnMovement1;
-            @Movement1.canceled -= instance.OnMovement1;
-            @Movement2.started -= instance.OnMovement2;
-            @Movement2.performed -= instance.OnMovement2;
-            @Movement2.canceled -= instance.OnMovement2;
-            @Movement3.started -= instance.OnMovement3;
-            @Movement3.performed -= instance.OnMovement3;
-            @Movement3.canceled -= instance.OnMovement3;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
         }
 
         public void RemoveCallbacks(IPlayerControllerActions instance)
@@ -578,11 +451,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
-        void OnRemove(InputAction.CallbackContext context);
-        void OnMovement0(InputAction.CallbackContext context);
-        void OnMovement1(InputAction.CallbackContext context);
-        void OnMovement2(InputAction.CallbackContext context);
-        void OnMovement3(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnSwitchWeapon(InputAction.CallbackContext context);
     }
 }
