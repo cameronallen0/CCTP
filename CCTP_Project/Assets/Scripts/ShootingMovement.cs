@@ -25,6 +25,8 @@ public class ShootingMovement : MonoBehaviour
     public GameObject rifle;
     public GameObject gun;
 
+    private float reloadTime;
+
     private bool scrollUp;
     
     //Looking Variables
