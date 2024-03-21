@@ -46,7 +46,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Run"",
+                    ""name"": ""Compass"",
                     ""type"": ""Button"",
                     ""id"": ""fb647550-eabd-497e-b039-4b60c2fa25e4"",
                     ""expectedControlType"": ""Button"",
@@ -187,7 +187,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""Compass"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -198,7 +198,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""Compass"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -288,7 +288,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerController = asset.FindActionMap("PlayerController", throwIfNotFound: true);
         m_PlayerController_Move = m_PlayerController.FindAction("Move", throwIfNotFound: true);
         m_PlayerController_Look = m_PlayerController.FindAction("Look", throwIfNotFound: true);
-        m_PlayerController_Run = m_PlayerController.FindAction("Run", throwIfNotFound: true);
+        m_PlayerController_Compass = m_PlayerController.FindAction("Compass", throwIfNotFound: true);
         m_PlayerController_Jump = m_PlayerController.FindAction("Jump", throwIfNotFound: true);
         m_PlayerController_Crouch = m_PlayerController.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerController_Shoot = m_PlayerController.FindAction("Shoot", throwIfNotFound: true);
@@ -356,7 +356,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerControllerActions> m_PlayerControllerActionsCallbackInterfaces = new List<IPlayerControllerActions>();
     private readonly InputAction m_PlayerController_Move;
     private readonly InputAction m_PlayerController_Look;
-    private readonly InputAction m_PlayerController_Run;
+    private readonly InputAction m_PlayerController_Compass;
     private readonly InputAction m_PlayerController_Jump;
     private readonly InputAction m_PlayerController_Crouch;
     private readonly InputAction m_PlayerController_Shoot;
@@ -367,7 +367,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public PlayerControllerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerController_Move;
         public InputAction @Look => m_Wrapper.m_PlayerController_Look;
-        public InputAction @Run => m_Wrapper.m_PlayerController_Run;
+        public InputAction @Compass => m_Wrapper.m_PlayerController_Compass;
         public InputAction @Jump => m_Wrapper.m_PlayerController_Jump;
         public InputAction @Crouch => m_Wrapper.m_PlayerController_Crouch;
         public InputAction @Shoot => m_Wrapper.m_PlayerController_Shoot;
@@ -387,9 +387,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
+            @Compass.started += instance.OnCompass;
+            @Compass.performed += instance.OnCompass;
+            @Compass.canceled += instance.OnCompass;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -412,9 +412,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
+            @Compass.started -= instance.OnCompass;
+            @Compass.performed -= instance.OnCompass;
+            @Compass.canceled -= instance.OnCompass;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -448,7 +448,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
+        void OnCompass(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
