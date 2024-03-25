@@ -5,14 +5,16 @@ using UnityEngine.InputSystem;
 
 public class TeleportPlayer : MonoBehaviour
 {
-    public Vector3 playerPos;
-    public Vector3 playerCurrentPos;
-    public Vector3 objectPos;
-    public Vector3 objectCurrentPos;
+    private Vector3 playerPos;
+    private Vector3 playerCurrentPos;
+    private Vector3 objectPos;
+    private Vector3 objectCurrentPos;
 
     public LayerMask objectLayer;
 
-    public GameObject currentObject;
+    private GameObject currentObject;
+
+    private int teleportRange = 30;
 
     public void CapturePositions()
     {
@@ -21,10 +23,10 @@ public class TeleportPlayer : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
         {
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, objectLayer))
+            if(Physics.Raycast(ray, out hit, teleportRange, objectLayer))
             {
-                objectPos = hit.point;
                 currentObject = hit.collider.gameObject;
+                objectPos = currentObject.transform.position;
             }
             else
             {
