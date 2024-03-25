@@ -7,13 +7,18 @@ using UnityEngine.InputSystem;
 public class ShootingMovement : MonoBehaviour
 {
     private PlayerControls inputActions;
+    TeleportPlayer teleportPlayer;
 
     //Movement Variables
     public float forceMagnitude;
     private float shotgunForce = 20f;
     private float pistolForce = 5f;
     private float rifleForce = 10f;
+    private float teleporterForce = 0f;
     private float maxVelcoity;
+
+    private float teleportCoolDown = 3f;
+    private float lastShotTime;
 
     List<object> gunForcesList = new List<object>();
     private int currentIndex = 0;
@@ -24,6 +29,7 @@ public class ShootingMovement : MonoBehaviour
     public GameObject shotgun;
     public GameObject pistol;
     public GameObject rifle;
+    public GameObject teleporter;
     public GameObject gun;
 
     private bool scrollUp;
@@ -39,6 +45,7 @@ public class ShootingMovement : MonoBehaviour
     private void Awake()
     {
         inputActions = new PlayerControls();
+        teleportPlayer = GetComponent<TeleportPlayer>();
     }
 
     private void Start()
@@ -52,10 +59,12 @@ public class ShootingMovement : MonoBehaviour
         gunForcesList.Add(shotgunForce);
         gunForcesList.Add(pistolForce);
         gunForcesList.Add(rifleForce);
+        gunForcesList.Add(teleporterForce);
 
         gunList.Add(shotgun);
         gunList.Add(pistol);
         gunList.Add(rifle);
+        gunList.Add(teleporter);
 
         foreach(GameObject gunPrefab in gunList)
         {
@@ -63,6 +72,8 @@ public class ShootingMovement : MonoBehaviour
         }
 
         gunList[0].SetActive(true);
+
+        lastShotTime = Time.time - teleportCoolDown;
     }
 
     private void OnEnable()
@@ -77,18 +88,38 @@ public class ShootingMovement : MonoBehaviour
         SwitchGun();
     }
 
+    private void TeleportPlayer()
+    {
+        teleportPlayer.CapturePositions();
+    }
+
     private void MovePlayer()
     {
         maxVelcoity = forceMagnitude * 2;
 
         if (inputActions.PlayerController.Shoot.triggered)
         {
+            forceMagnitude = (float)gunForcesList[currentIndex];
             Vector3 forceDirection = -transform.forward;
             rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
             Debug.Log("Shoot");
         }
 
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelcoity);
+
+        if(forceMagnitude == teleporterForce && CanShoot())
+        {
+            if(inputActions.PlayerController.Shoot.triggered)
+            {
+                TeleportPlayer();
+                lastShotTime = Time.time;
+            }
+        }
+    }
+
+    private bool CanShoot()
+    {
+        return Time.time - lastShotTime >= teleportCoolDown;
     }
 
     private void SwitchGun()
@@ -124,9 +155,6 @@ public class ShootingMovement : MonoBehaviour
             GameObject previousGun = gunList[(currentGunIndex + 1 + gunList.Count) % gunList.Count];
             previousGun.SetActive(false);
         }
-        
-
-        forceMagnitude = (float)gunForcesList[currentIndex];
         gun = gunList[currentGunIndex];
         gun.SetActive(true);
     }
