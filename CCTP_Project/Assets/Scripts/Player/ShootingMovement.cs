@@ -18,9 +18,6 @@ public class ShootingMovement : MonoBehaviour
     private float teleporterForce = 0f;
     private float maxVelcoity;
 
-    private float teleportCoolDown = 3f;
-    private float lastShotTime;
-
     List<object> gunForcesList = new List<object>();
     private int currentIndex = 0;
 
@@ -33,6 +30,9 @@ public class ShootingMovement : MonoBehaviour
     public GameObject teleporter;
     public GameObject gun;
 
+    private float teleportCooldown;
+    private bool canShoot;
+
     private bool scrollUp;
 
     //Looking Variables
@@ -40,7 +40,7 @@ public class ShootingMovement : MonoBehaviour
     private float xRotation = 0f;
 
     public Camera cam;
-    private Rigidbody rb;
+    public Rigidbody rb;
 
 
     private void Awake()
@@ -73,8 +73,6 @@ public class ShootingMovement : MonoBehaviour
         }
 
         gunList[0].SetActive(true);
-
-        lastShotTime = Time.time - teleportCoolDown;
     }
 
     private void OnEnable()
@@ -108,19 +106,13 @@ public class ShootingMovement : MonoBehaviour
 
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelcoity);
 
-        if(forceMagnitude == teleporterForce && CanShoot())
+        if(forceMagnitude == teleporterForce && canShoot)
         {
             if(inputActions.PlayerController.Shoot.triggered)
             {
-                TeleportPlayer();
-                lastShotTime = Time.time;
+                StartCoroutine(TeleportCooldown());
             }
         }
-    }
-
-    private bool CanShoot()
-    {
-        return Time.time - lastShotTime >= teleportCoolDown;
     }
 
     private void SwitchGun()
@@ -177,6 +169,19 @@ public class ShootingMovement : MonoBehaviour
     public Vector2 GetPlayerLook()
     {
         return inputActions.PlayerController.Look.ReadValue<Vector2>();
+    }
+
+    IEnumerator TeleportCooldown()
+    {
+        canShoot = false;
+
+        TeleportPlayer();
+
+        yield return new WaitForSeconds(teleportCooldown);
+
+        canShoot = true;
+
+        yield return null;
     }
 
 

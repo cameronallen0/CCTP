@@ -6,6 +6,7 @@ public class KillZone : MonoBehaviour
 {
     public Transform respawnPoint;
     public TeleportPlayer playerT;
+    public ShootingMovement playerScript;
 
     public string objectTag = "Player";
     public bool isKill;
@@ -21,6 +22,7 @@ public class KillZone : MonoBehaviour
     private void KillPlayer(GameObject player)
     {
         player.transform.position = respawnPoint.position;
+        playerScript.rb.velocity = Vector3.zero;
         isKill = true;
         playerT.PlayerFail();
     }
