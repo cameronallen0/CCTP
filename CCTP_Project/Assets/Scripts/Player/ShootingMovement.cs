@@ -30,8 +30,8 @@ public class ShootingMovement : MonoBehaviour
     public GameObject teleporter;
     public GameObject gun;
 
-    private float teleportCooldown;
-    private bool canShoot;
+    private float teleportCooldown = 3f;
+    private bool canShoot = true;
 
     private bool scrollUp;
 
